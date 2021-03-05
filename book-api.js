@@ -53,4 +53,20 @@ app.delete('/book/:isbn', (req, res) => {
     res.send('Book is deleted');
 });
 
+app.post('/book/:isbn', (req, res) => {
+    // Reading isbn from the URL
+    const isbn = req.params.isbn;
+    const newBook = req.body;
+
+    // Remove item from the books array
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i]
+        if (book.isbn === isbn) {
+            books[i] = newBook;
+        }
+    }
+
+    res.send('Book is edited');
+});
+
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`));
